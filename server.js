@@ -29,15 +29,10 @@ app.all("*", (req, res, next) => {
 app.use(gobalErrorHandler);
 
 // Connect to DB
-connectDB();
-
-// For local development
-if (process.env.NODE_ENV !== "production") {
+connectDB().then(() => {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-}
+})
 
-// Export for Vercel
-module.exports = app;

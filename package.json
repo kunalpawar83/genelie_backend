@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon -r dotenv/config --experimental-json-modules server.js",
-    "start:prod": "NODE_ENV=production nodemon -r dotenv/config --experimental-json-modules server.js"
+    "start:prod": "NODE_ENV=development nodemon -r dotenv/config --experimental-json-modules server.js"
   },
   "keywords": [],
   "author": "",

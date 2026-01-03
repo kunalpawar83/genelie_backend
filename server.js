@@ -19,6 +19,7 @@ app.use((req, res, next) => {
   logger.info(`${req.method} ${req.url}`);
   next();
 });
+app.use("/wishList", require("./routes/wishList.js"));
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the API from the backend server" });

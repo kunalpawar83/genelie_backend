@@ -56,13 +56,15 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
-  if (process.env.NODE_ENV === "development") {
-    senderrordev(err, res);
-  } else if (process.env.NODE_ENV === "production") {
+  const env = (process.env.NODE_ENV || "development").trim().toLowerCase();
+
+  if (env === "production") {
     if (err.name === "CastError") err = handleCastErrorDB(err);
     if (err.code === 11000) err = handleDuplicateErrorDB(err);
     if (err.name === "ValidationError") err = handleValidationErrorDB(err);
     if (err.name === "JsonWebTokenError") err = handleJsonWebTokenError(err);
     senderrorprod(err, res);
+  } else {
+    senderrordev(err, res);
   }
 };
